@@ -1,0 +1,1 @@
+INSERT INTO pizze (`id`, `update_at`, `author`, `isbn_code`, `title`) VALUES ('1','2024-08-24 12:00:00.000000', 'Mario' , '978-8817124013','Margherita'),('2', '2024-08-25 12:10:00.000000', 'Tizio', '979-8827234014', 'Capricciosa');
