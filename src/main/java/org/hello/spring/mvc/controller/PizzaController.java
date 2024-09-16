@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,4 +28,17 @@ public class PizzaController {
 		
 		return "/pizze/index";
 	}
+	
+	@GetMapping("/findByTitle{title}")
+	public String findByTitle(@PathVariable("title") String title, Model model) {
+		model.addAttribute("pizze", repo.findByTitleLike(title));
+		return "/pizze/index";
+	}
+	
+	@GetMapping("/{id}")
+	public String show(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("pizza", repo.findById(id).get());
+		return "/pizze/show";
+	}
+	
 }

@@ -22,6 +22,7 @@
 									<th>Title</th>
 									<th>Author</th>
 									<th>ISBN</th>
+									<th class="button-headers"></th>
 								</tr>							
 							</thead>
 							
@@ -30,7 +31,20 @@
 									<td th:text="${pizza.id}"></td>
 									<td th:text="${pizza.title}"></td>
 									<td th:text="${pizza.author}"></td>
-									<td th:text="${pizza.isbn}"></t>
+									<td th:text="${pizza.isbn}"></td>
+									<td class>
+										<a th:href="@{/pizze/{id}(id=${pizza.id})}" class="btn btn-sm btn-primary">
+											Show
+										</a>
+									
+										<a class="btn btn-sm btn-success">
+											Edit
+										</a>
+									
+										<a class="btn btn-sm btn-warning">
+											Delete
+										</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
