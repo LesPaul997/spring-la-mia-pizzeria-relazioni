@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/pizze")
@@ -20,25 +21,37 @@ public class PizzaController {
 	@Autowired
 	private PizzaRepository repo;
 	
-	@GetMapping()
-	public String index(Model model) {
+	@GetMapping
+	public String index(Model model, @RequestParam(name = "name", required = false) String name) {
 		
 		// consegna dei dati a pizza/index 
-		model.addAttribute("pizze", repo.findAll());
+		List<Pizza> pizzaList;
+		
+		if ( name !=null && !name.isEmpty()) {		
+			pizzaList = repo.findByNameContainingOrderByName(name);
+		} else {
+			pizzaList = repo.findAll();
+		}
+		model.addAttribute("pizze", pizzaList);
 		
 		return "/pizze/index";
 	}
 	
-	@GetMapping("/findByTitle{title}")
-	public String findByTitle(@PathVariable("title") String title, Model model) {
-		model.addAttribute("pizze", repo.findByTitleLike(title));
-		return "/pizze/index";
-	}
+//	@GetMapping("/findByTitle/{name}")
+//	public String findByTitle(@PathVariable("name") String name, Model model) {
+//		model.addAttribute("pizze", repo.findByName(name));
+//		return "/pizze/index";
+//	}
 	
-	@GetMapping("/{id}")
-	public String show(@PathVariable("id") Integer id, Model model) {
+
+	@GetMapping("/show/{id}")
+	public String pizzaDetails(@PathVariable int id, Model model) {
+
+		// consegna al model di una specifica ennupla pizza tramite ID
 		model.addAttribute("pizza", repo.findById(id).get());
+
 		return "/pizze/show";
 	}
+	
 	
 }

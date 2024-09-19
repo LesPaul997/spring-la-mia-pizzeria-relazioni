@@ -1,6 +1,9 @@
 package org.hello.spring.mvc.model;
 
+import java.security.Timestamp;
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,16 +20,41 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String title;
+	@Column(length = 100)
+	private String name;
 	
-	private String author;
+	@Column(length = 1000)
+	private String description;
 	
-	@Column(name="isbn_code", nullable=false)
-	private String isbn;
-	
-	private LocalDateTime updateAt;
+	@Column(name="image_url", nullable=true)
+	private String url;
 
-	//Getter e Setter
+	private Double price;
+	
+	private Boolean available;
+	
+	@Column(name="created_at")
+	private LocalDateTime createdAt;
+	
+	@Column(name="updated_at")
+	private LocalDateTime updatedAt;
+	/*
+	
+	@Column(name="created_at")
+	private Timestamp createdAt;
+	
+	@Column(name="updated_at")
+	private Timestamp updatedAt;
+	*/
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -35,35 +63,56 @@ public class Pizza {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getAuthor() {
-		return author;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getIsbn() {
-		return isbn;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public LocalDateTime getUpdateAt() {
-		return updateAt;
+	public Double getPrice() {
+		return price;
 	}
 
-	public void setUpdateAt(LocalDateTime updateAt) {
-		this.updateAt = updateAt;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
+
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	
+	
+	
+	
 }

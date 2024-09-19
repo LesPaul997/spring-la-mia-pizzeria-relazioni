@@ -15,23 +15,26 @@
 					
 				
 					<h1 class="py-4 mb-2 text-center">
-						Detail for [[ ${pizza.title} ]]
+						Lista of available pizze : [[ ${pizzaname} ]]
 					</h1>	
 					
-						<div class="row justify-content-center">
-							<div class="col-6">
-								<div class="card">
-								  <div class="card-header">
-								    Single pizza detail -- ISBN: [[ ${pizza.isbn} ]]
-								  </div>
-								  <div class="card-body">
-								    <h5 class="card-title">[[ ${pizza.author} ]]</h5>
-								    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								    <a th:href="@{/pizze}" class="btn btn-primary">Back</a>
-								  </div>
-								</div>
+					
+
+							<div class="py-3">
+								<h1 th:text="'Descrizione della pizza ' + ${pizza.name}"></h1>
 							</div>
-						</div>	
+
+							<div class="py-3">
+								<h2>Lorem Pizzum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut
+									labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut
+									aliquid ex ea commodi consequatur.
+									Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+									sint obcaecat cupiditat non proident,
+									sunt in culpa qui officia deserunt mollit anim id est laborum.</h2>
+							</div>
+
+						
 							
 					
 				</th:block>	
