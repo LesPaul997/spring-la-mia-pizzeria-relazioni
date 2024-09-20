@@ -1,6 +1,5 @@
 package org.hello.spring.mvc.model;
 
-import java.security.Timestamp;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pizze")
@@ -20,16 +22,24 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull
+	@Size(min=2, max=255)
 	@Column(length = 100)
 	private String name;
 	
+	@NotNull
+	@Size(max=500)
 	@Column(length = 1000)
 	private String description;
 	
 	@Column(name="image_url", nullable=true)
 	private String url;
 
-	private Double price;
+	@NotNull
+	@Min(2)
+	@Column(name = "price", nullable = false)
+	private double price;
+	
 	
 	private Boolean available;
 	

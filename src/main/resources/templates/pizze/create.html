@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: head}">
+</head>
+<body>
+	<header th:insert="~{fragments/fragments :: navbar}">
+		
+	</header>
+    
+	<main class="container">
+		<div class="row">
+			<div class="col-12">	
+				
+				<th:block>
+					
+				
+					<h1 class="py-4 mb-2 text-center">
+						Creating a new Pizza
+					</h1>	
+					
+						<div class="row justify-content-center">
+							<div class="col-6">
+								<!-- Form -->
+								<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/create}" method="POST">
+									<div class="mb-3">
+									  <label for="name" class="form-label">Name</label>
+									  <input type="text" class="form-control" id="name" placeholder="Inserisci il nome della pizza" th:field="*{name}" th:errorClass="is-invalid">
+									  <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+										<ul>
+											<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+										</ul>
+									  </div>
+									</div>
+									<div class="mb-3">
+									  <label for="description" class="form-label">Descrizione</label>
+									  <input type="text" class="form-control" id="description" placeholder="Descrivi la pizza" th:field="*{description}" th:errorClass="is-invalid">
+									  <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+									  	<ul>
+									  		<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+									  	</ul>
+									  </div>
+									</div>
+									<div class="mb-4">
+									  <label for="price" class="form-label">Prezzo</label>
+									  <input type="number" class="form-control" id="price" placeholder="Inserisci il prezzo" th:field="*{price}" th:errorClass="is-invalid">
+									  <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+									  	<ul>
+									  		<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+									  	</ul>
+									  </div>
+									</div>
+									<!-- Bottoni -->
+									<div class="mb-3 d-flex justify-content-between">
+										<input type="submit" class="btn btn-primary btn-lg" value="Create new pizza">
+										<input type="reset" class="btn btn-warning btn-lg" value="Reset fields">
+									</div>
+									<!-- /Bottoni -->
+								</form>
+							</div>
+						</div>
+						
+							
+					
+				</th:block>	
+				
+			</div>	
+		</div>
+		
+	</main>
+	
+	<footer th:replace="~{fragments/fragments :: footer}"></footer>
+</body>
+</html>
