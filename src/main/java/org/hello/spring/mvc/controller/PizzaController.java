@@ -67,12 +67,14 @@ public class PizzaController {
 		return "/pizze/index";
 	}
 	
+	//CREATE
 	@GetMapping("/create")
 	public String create(Model model) {
 		model.addAttribute("pizza", new Pizza());
 		return "/pizze/create";
 	}
 	
+	//STORE
 	@PostMapping("/create")
 	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
 		
@@ -84,5 +86,45 @@ public class PizzaController {
 		}
 		
 	}
+	
+	//EDIT
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id, Model model) {
+		
+		// Trovo la pizza
+		//Pizza pizzaToEdit = repo.findById(id).get();
+		// Lo inserisco nel model
+		model.addAttribute("pizza", repo.findById(id).get());
+		
+		// Restituisco la view con il model inserito	
+		return "/pizze/edit";
+	}
+	
+	//UPDATE 
+	@PostMapping("/edit/{id}") 
+	public String update(@Valid @ModelAttribute("pizza") Pizza updatedFormPizza, BindingResult bindingResult, Model model) {
+		
+		// Se ci sono errori nel form
+		if (bindingResult.hasErrors()) {
+			// Ritorna nel form e mostra gli errori
+			return "/pizze/edit";
+		// Altrimenti 
+		} else { 
+			// Prendi la mia repo particolare e aggiorna la pizza con i nuovi dati convalidati
+			repo.save(updatedFormPizza);
+			// Ridireziona l'utente alla index delle pizze
+			return "redirect:/pizze";
+		}
+	}
+	
+	// DELETE
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+		
+		// Prendi la mia repo particolare e dopo aver trovato la mia pizza attraverso l'id, cancellalo dal DB
+		repo.deleteById(id);
+		return "redirect:/pizze";
+	}
+	
 	
 }
