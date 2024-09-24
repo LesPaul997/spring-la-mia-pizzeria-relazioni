@@ -58,10 +58,10 @@
 													 <!-- Button trigger modal -->
 													 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${pizza.id}">
 													   Cancella
-													 </button>
-
+													 </button> 
+				
 													 <!-- Modal -->
-													 <div class="modal fade" th:id="'#delete-modal-' + ${pizza.id}" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+													 <div class="modal fade" th:id="'#delete-' + ${pizza.id}" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
 													   <div class="modal-dialog modal-dialog modal-dialog-centered">
 													     <div class="modal-content">
 													       <div class="modal-header">
@@ -72,17 +72,17 @@
 													         Sei sicuro di voler cancellare questa pizza 
 													       </div>
 													       <div class="modal-footer">
-													         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+													         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  -->
 															 <!-- Bottone cancella -->
 															 	<form class="d-inline-block" th:action="@{/pizze/delete/{id}(id=${pizza.id})}" method="POST">
 															 		<button type="submit" class="btn btn-sm btn-danger" >
 															 			Cancella
 															 		</button>
-																</form>
+																</form> 
 													       </div>
 													     </div>
 													   </div>
-													 </div>
+													 </div> 
 													
 													
 												</td>
