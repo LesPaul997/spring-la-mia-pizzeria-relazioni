@@ -23,4 +23,7 @@ public class DiscountService {
 		return repo.save(discount);
 	}
  	
+	public Discount getById(Integer id) {
+		return repo.findById(id).get();
+	}
 }

@@ -16,7 +16,7 @@
 				
 					<h1 class="py-4 mb-2 text-center">
 						New discount for pizza
-						<span th:text="${discount.pizza.name}"></span>
+						<!--<span th:text="${discount.pizza.name}"></span>-->
 					</h1>	
 					
 						<div class="row justify-content-center">
@@ -24,7 +24,7 @@
 								<!-- Form -->
 								<form id="discount-form" th:object="${discount}" th:action="@{/discounts/create}" method="POST">
 									
-									<input type="hidden" th:field="*{pizza}" id="pizza">
+									<!--<input type="hidden" th:field="*{pizza}" id="pizza">-->
 									
 									
 									<div class="mb-3">

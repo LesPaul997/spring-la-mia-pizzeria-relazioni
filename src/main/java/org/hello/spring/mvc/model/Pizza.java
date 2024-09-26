@@ -14,6 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -81,6 +84,15 @@ public class Pizza {
 			"on pizze.id = discounts.pizza_id " + 
 			"where pizze.id = id)")
 	private Integer validDiscount;
+	
+	//  Aggiungere relazione con categoria
+	@ManyToMany()
+	@JoinTable(
+		name = "pizza_ingredient",
+		joinColumns = @JoinColumn(name = "pizza_id"),
+		inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+		)	
+	private List<Ingredient> ingredients;
 	
 	public Integer getValidDiscount() {
 		return validDiscount;
@@ -173,6 +185,14 @@ public class Pizza {
 
 	public void setNumberOfDiscount(Integer numberOfDiscount) {
 		this.numberOfDiscount = numberOfDiscount;
+	}
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 	
 	

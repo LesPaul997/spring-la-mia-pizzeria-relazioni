@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: head}">
+</head>
+<body>
+	<header th:insert="~{fragments/fragments :: navbar}">
+		
+	</header>
+    
+	<main class="container py-5 mb-5">
+		<div class="row">
+			<div class="col-12">	
+				
+				<th:block>
+					
+					<!--
+					<h1 class="py-4 mb-2 text-center">
+						Lista of available pizze : [[ ${pizzaname} ]]
+					</h1>	
+					
+							<div class="py-3">
+								<h1 th:text="'Descrizione della pizza ' + ${pizza.name}"></h1>
+							</div>
+
+							<div class="py-3">
+								<h2>Lorem Pizzum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut
+									labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut
+									aliquid ex ea commodi consequatur.
+									Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+									sint obcaecat cupiditat non proident,
+									sunt in culpa qui officia deserunt mollit anim id est laborum.</h2>
+							</div>
+
+							<div class="py-3">
+								<h1 th:text="'Sconti offerti: ' + ${pizza.numberOfDiscount}"></h1>
+								<h1 th:text="'Sconti disponibili: ' + ${pizza.validDiscount}"></h1>
+								
+							</div>   -->
+							
+							<div class="card text-center">
+							  <div class="card-header">
+							    Pizza : <strong>[[ ${pizza.name} ]]</strong>
+							  </div>
+							  <div class="card-body">
+							    <p class="card-text">Lorem Pizzum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut
+								labore et
+								dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut
+								aliquid ex ea commodi consequatur.
+								Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+								sint obcaecat cupiditat non proident,
+								sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							  </div>
+							  <div class="card-footer text-muted">
+								<h5 th:text="'Sconti offerti: ' + ${pizza.numberOfDiscount}"></h5>
+								<h5 th:text="'Sconti disponibili: ' + ${pizza.validDiscount}"></h5>
+							  </div>
+							</div>
+							
+					
+				</th:block>	
+				
+			</div>	
+		</div>
+		
+	</main>
+	
+	<footer th:replace="~{fragments/fragments :: footer}"></footer>
+</body>
+</html>

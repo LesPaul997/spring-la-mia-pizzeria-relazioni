@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.hello.spring.mvc.model.Discount;
 import org.hello.spring.mvc.model.Pizza;
 import org.hello.spring.mvc.repo.PizzaRepository;
+import org.hello.spring.mvc.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,9 @@ public class PizzaController {
 	
 	@Autowired
 	private PizzaRepository repo;
+	
+	@Autowired
+	PizzaService pizzaService;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam(name = "name", required = false) String name) {
@@ -65,7 +69,7 @@ public class PizzaController {
 	// Creazione di un nuovo sconto
 	@GetMapping("/{id}/discount")
 	public String discount(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
-		Pizza pizza = repo.getById(id);
+		Pizza pizza = pizzaService.getById(id);
 		if(pizza.getNumberOfDiscount() > 0) {
 			
 		Discount discount = new Discount();

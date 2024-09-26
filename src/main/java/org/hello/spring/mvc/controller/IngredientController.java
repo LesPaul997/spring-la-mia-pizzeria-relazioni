@@ -1,8 +1,8 @@
 package org.hello.spring.mvc.controller;
 
-import org.hello.spring.mvc.model.Discount;
 import org.hello.spring.mvc.model.Ingredient;
-import org.hello.spring.mvc.service.DiscountService;
+import org.hello.spring.mvc.model.Pizza;
+import org.hello.spring.mvc.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,33 +15,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/discounts")
-public class DiscountController {
+@RequestMapping("/ingredients")
+public class IngredientController {
 
 	@Autowired
-	private DiscountService service;
+	private IngredientService service;
 	
 	@GetMapping()
 	public String index(Model model) {
-		model.addAttribute("discounts", service.findAllSortedByDiscountDate());
-		return "/discount/index";
+		model.addAttribute("ingredients", service.findAll());
+		return "/ingredients/index";
 	}
+	
+	
 	
 	//CREATE
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute(new Discount());
-		return "/discount/create";
+		model.addAttribute(new Ingredient());
+		return "/ingredients/create";
 	}
-	
+		
+	//STORE
 	@PostMapping("/create")
-	public String store(@Valid @ModelAttribute("discount") Discount formDiscount, BindingResult bindingResult, Model model) {
+	public String store(@Valid @ModelAttribute("pizza") Ingredient formIngredient, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			return "/discount/create";
+			return "/ingredients/create";
 		} else {
-		service.create(formDiscount);
-		return "redirect:/pizze/show" + formDiscount.getPizza().getId();
+			service.create(formIngredient);
+			return "redirect:/ingredients";
 		}
+		
 	}
+		
 }
