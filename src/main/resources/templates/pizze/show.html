@@ -51,6 +51,9 @@
 								sint obcaecat cupiditat non proident,
 								sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 							  </div>
+							  <div th:if="${pizza.ingredients.size()} > 0">
+								Ingredienti : <span class="" th:each="ingredient : ${pizza.ingredients}">[[ ${ingredient.name} ]] - </span>
+							  </div>
 							  <!--
 							  <div class="card-footer text-muted">
 								<h5 th:text="'Sconti offerti: ' + ${pizza.numberOfDiscount}"></h5>

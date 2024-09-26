@@ -66,7 +66,7 @@ public class PizzaController {
 
 		// consegna al model di una specifica ennupla pizza tramite ID
 		model.addAttribute("pizza", repo.findById(id).get());
-
+		
 		return "/pizze/show";
 	}
 	
@@ -110,6 +110,7 @@ public class PizzaController {
 	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("ingredients", ingredientService.findAll());
 			return "/pizze/create";
 		} else {
 			repo.save(formPizza);
@@ -138,6 +139,7 @@ public class PizzaController {
 		// Se ci sono errori nel form
 		if (bindingResult.hasErrors()) {
 			// Ritorna nel form e mostra gli errori
+			model.addAttribute("ingredients", ingredientService.findAll());
 			return "/pizze/edit";
 		// Altrimenti 
 		} else { 

@@ -16,14 +16,14 @@
 						Lista delle Pizze
 					</h1>
 						
-								<form th:action="@{/pizze/search}" method="GET" class="col-8">
+								<form th:action="@{/pizze/search}" method="GET" class="col-12 p-4">
 										<div class="form-group my-3 row">
-											<div class="col-8">
-												<input name="name" type="text" class="form-control" id="name-input"
+											<div class="col-md-8">
+												<input name="name" type="text" class="form-control me-2 w-100" id="name-input"
 													placeholder="cerca pizze per nome">
 											</div>
 											<div class="col-4 ps-0">
-												<button type="submit" class="btn btn-success">Cerca Pizze</button>
+												<button type="submit" class="btn btn-success w-100">Cerca Pizze</button>
 											</div>
 										</div>
 								</form>
