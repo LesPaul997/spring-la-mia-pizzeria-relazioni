@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.hello.spring.mvc.model.Discount;
 import org.hello.spring.mvc.model.Pizza;
 import org.hello.spring.mvc.repo.PizzaRepository;
+import org.hello.spring.mvc.service.IngredientService;
 import org.hello.spring.mvc.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,10 @@ public class PizzaController {
 	private PizzaRepository repo;
 	
 	@Autowired
-	PizzaService pizzaService;
+	private PizzaService pizzaService;
+	
+	@Autowired
+	private IngredientService ingredientService;
 	
 	@GetMapping
 	public String index(Model model, @RequestParam(name = "name", required = false) String name) {
@@ -97,6 +101,7 @@ public class PizzaController {
 	@GetMapping("/create")
 	public String create(Model model) {
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("ingredients", ingredientService.findAll());
 		return "/pizze/create";
 	}
 	
@@ -121,7 +126,7 @@ public class PizzaController {
 		//Pizza pizzaToEdit = repo.findById(id).get();
 		// Lo inserisco nel model
 		model.addAttribute("pizza", repo.findById(id).get());
-		
+		model.addAttribute("ingredients", ingredientService.findAll());
 		// Restituisco la view con il model inserito	
 		return "/pizze/edit";
 	}

@@ -1,7 +1,6 @@
 package org.hello.spring.mvc.controller;
 
 import org.hello.spring.mvc.model.Ingredient;
-import org.hello.spring.mvc.model.Pizza;
 import org.hello.spring.mvc.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -40,6 +40,13 @@
 									  	</ul>
 									  </div>
 									</div>
+									
+									<!-- CHECK BOX INGREDIENTI-->
+									<div th:each="ingredient : ${ingredients}" class="form-check mb-3" role="group" aria-label="Basic checkbox toggle button group">
+									    <input type="checkbox" class="form-check-input" th:value="${ingredient.id}" th:id="|ingredient_${ingredient.id}|" th:field="${pizza.ingredients}">
+										<label class="form-check-label" th:for="|ingredient_${ingredient.id}|" th:text="${ingredient.name}"></label>
+									</div>
+									<!-- /CHECK BOX INGREDIENTI -->
 									<div class="mb-3">
 										<label for="numberOfDiscount" class="form-label">Discount</label>
 										<input type="number" class="form-control" id="numberOfDiscount" placeholder="2" th:field="*{numberOfDiscount}" th:errorClass="is-invalid">
