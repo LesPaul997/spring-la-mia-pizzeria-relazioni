@@ -1,7 +1,10 @@
 package org.hello.spring.mvc.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
+import org.hello.spring.mvc.model.Discount;
 import org.hello.spring.mvc.model.Pizza;
 import org.hello.spring.mvc.repo.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 
@@ -48,7 +52,7 @@ public class PizzaController {
 //		return "/pizze/index";
 //	}
 	
-
+	// Ricerca per ID
 	@GetMapping("/show/{id}")
 	public String pizzaDetails(@PathVariable int id, Model model) {
 
@@ -58,6 +62,24 @@ public class PizzaController {
 		return "/pizze/show";
 	}
 	
+	// Creazione di un nuovo sconto
+	@GetMapping("/{id}/discount")
+	public String discount(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+		Pizza pizza = repo.getById(id);
+		if(pizza.getNumberOfDiscount() > 0) {
+			
+		Discount discount = new Discount();
+		discount.setDiscountDate(LocalDate.now());
+		discount.setPizza(pizza);
+		model.addAttribute("discount", discount);
+		return "/discount/create";
+		}else {
+			redirectAttributes.addFlashAttribute("successMessage", pizza.getName() + "has no more discounts available!");
+			return "redirect:/pizze";
+		}
+	}
+	
+	//Campo di ricerca
 	@GetMapping("/search")
 	public String pizzaSearch(@RequestParam String name, Model model) {
 
@@ -125,6 +147,7 @@ public class PizzaController {
 		repo.deleteById(id);
 		return "redirect:/pizze";
 	}
+
 	
 	
 }

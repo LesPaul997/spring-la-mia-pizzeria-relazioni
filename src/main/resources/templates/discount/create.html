@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: head}">
+</head>
+<body>
+	<header th:insert="~{fragments/fragments :: navbar}">
+		
+	</header>
+    
+	<main class="container">
+		<div class="row">
+			<div class="col-12">	
+				
+				<th:block>
+					
+				
+					<h1 class="py-4 mb-2 text-center">
+						New discount for pizza
+						<span th:text="${discount.pizza.name}"></span>
+					</h1>	
+					
+						<div class="row justify-content-center">
+							<div class="col-6">
+								<!-- Form -->
+								<form id="discount-form" th:object="${discount}" th:action="@{/discounts/create}" method="POST">
+									
+									<input type="hidden" th:field="*{pizza}" id="pizza">
+									
+									
+									<div class="mb-3">
+									  <label for="discountDate" class="form-label">Discount date</label>
+									  <input type="date" class="form-control" id="discountDate" placeholder="" th:field="*{discountDate}" th:errorClass="is-invalid">
+									  <div th:if="${#fields.hasErrors('discountDate')}" class="invalid-feedback">
+									  	<ul>
+									  		<li th:each="err : ${#fields.errors('discountDate')}" th:text="${err}"></li>
+									  	</ul>
+									  </div>
+									</div>
+									<div class="mb-3">
+										<label for="returnDate" class="form-label">Return date</label>
+										<input type="date" class="form-control" id="returnDate" placeholder="2" th:field="*{returnDate}" th:errorClass="is-invalid">
+										<div th:if="${#fields.hasErrors('returnDate')}" class="invalid-feedback">
+											<ul>
+												<li th:each="err : ${#fields.errors('returnDate')}" th:text="${err}"></li>
+											</ul>
+										</div>
+										</div>
+									<!-- Bottoni -->
+									<div class="mb-3 d-flex justify-content-between">
+										<input type="submit" class="btn btn-primary btn-lg" value="Create new discount">
+										<input type="reset" class="btn btn-warning btn-lg" value="Reset fields">
+									</div>
+									<!-- /Bottoni -->
+								</form>
+							</div>
+						</div>
+						
+							
+					
+				</th:block>	
+				
+			</div>	
+		</div>
+		
+	</main>
+	
+	<footer th:replace="~{fragments/fragments :: footer}"></footer>
+</body>
+</html>

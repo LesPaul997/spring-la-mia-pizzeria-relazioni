@@ -1,15 +1,22 @@
 package org.hello.spring.mvc.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -56,6 +63,44 @@ public class Pizza {
 	@Column(name="updated_at")
 	private Timestamp updatedAt;
 	*/
+
+	@NotNull
+	@Max(250)
+	private Integer numberOfDiscount;
+	
+	// 1 - Il tipo di relazione da qualificare
+	// 2 - Comportamenti da seguire nel db qualora vengano cambiate le informazioni
+	// A cascata verranno rimossi tutti gli sconti ad esso connessi
+	@OneToMany(mappedBy = "pizza", cascade = { CascadeType.REMOVE })
+	@JsonManagedReference
+	private List<Discount> discounts;
+	
+	@Formula("( SELECT pizze.number_of_discount - count(discounts.id) " +
+			"from pizze " +
+			"left join discounts " +
+			"on pizze.id = discounts.pizza_id " + 
+			"where pizze.id = id)")
+	private Integer validDiscount;
+	
+	public Integer getValidDiscount() {
+		return validDiscount;
+	}
+
+	public void setValidDiscount(Integer validDiscount) {
+		this.validDiscount = validDiscount;
+	}
+
+	public List<Discount> getDiscounts() {
+		return discounts;
+	}
+
+	public void setDiscounts(List<Discount> discounts) {
+		this.discounts = discounts;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
@@ -120,6 +165,14 @@ public class Pizza {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public Integer getNumberOfDiscount() {
+		return numberOfDiscount;
+	}
+
+	public void setNumberOfDiscount(Integer numberOfDiscount) {
+		this.numberOfDiscount = numberOfDiscount;
 	}
 	
 	

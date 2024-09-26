@@ -65,9 +65,6 @@
 															th:data-bs-target="'#delete-' + ${pizza.id}">
 															Cancella
 														</button>
-														
-														<a th:if="${pizza.numberOfDiscount} > 0" th:href="@{/pizze/{id}/discount(id=${pizza.id})}" class="btn btn-outline-primary btn-sm">**</a>
-														
 														<!-- Modal -->
 														<div class="modal fade" th:id="'delete-' + ${pizza.id}" tabindex="-1"
 															aria-labelledby="exampleModalLabel" aria-hidden="true">
