@@ -10,6 +10,7 @@ import org.hello.spring.mvc.repo.PizzaRepository;
 import org.hello.spring.mvc.service.IngredientService;
 import org.hello.spring.mvc.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,11 +40,11 @@ public class PizzaController {
 	private IngredientService ingredientService;
 	
 	@GetMapping
-	public String index(Model model, @RequestParam(name = "name", required = false) String name) {
+	public String index(Authentication authentication, Model model, @RequestParam(name = "name", required = false) String name) {
 		
 		// consegna dei dati a pizza/index 
 		List<Pizza> pizzaList;
-		
+		model.addAttribute("username", authentication.getName());
 		if ( name !=null && !name.isEmpty()) {		
 			pizzaList = repo.findByNameContainingOrderByName(name);
 		} else {
